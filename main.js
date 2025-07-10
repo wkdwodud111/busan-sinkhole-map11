@@ -24,6 +24,55 @@ document.addEventListener("DOMContentLoaded", () => {
       box.style.display = (box.style.display === "none") ? "block" : "none";
     };
 
+    // 전체 색칠함수
+    let isFilled = false; // 상태 저장용
+    window.fillAllRegions = function () {
+      const colorMap = {
+        sasanggu: "#FF6464",
+        sahagu: "#FFC864",
+        sa1: "#FFC864",
+        sa2: "#FFC864",
+        sa3: "#FFC864",
+        sa4: "#FFC864",
+        sa5: "#FFC864",
+        namgu: "#FFFF64",
+        haeundaegu: "#96C864",
+        dongnaegu: "#FFC864",
+        yeonjegu: "#FFC864",
+        suyeonggu: "#009664",
+        geumjeonggu: "#96C864",
+        bukgu: "#FFC864",
+        gijanggun: "#009664",
+        busanjingu: "#FFFF64",
+        donggu: "#96C864",
+        seogu: "#FFFF64",
+        seo1: "#FFFF64",
+        junggu: "#009664",
+        jungli1: "#009664",
+        jungli2: "#009664",
+        yeongdogu: "#96C864",
+        yeong1: "#96C864",
+        gangseogu1: "#96C864",
+        gangseogu2: "#96C864",
+        gangseogu3: "#96C864",
+        gang1:"#96C864",
+        gang2:"#96C864",
+        gang3:"#96C864",
+        gang4:"#96C864",
+        gang5:"#96C864",
+        gangli: "#96C864"
+      };
+
+      for (const [id, color] of Object.entries(colorMap)) {
+        const region = svgDoc.getElementById(id);
+        if (region) {
+          region.setAttribute("fill", isFilled ? "#FFFFFF" : color);  // 흰색으로 초기화
+        }
+      }
+
+      isFilled = !isFilled; // 상태 반전
+    };
+
 // 사상구 시작------------------------------------------------------------------
 const sasanggu = svgDoc.getElementById("sasanggu");
 
