@@ -155,12 +155,10 @@ const infoSahagu2 = document.getElementById("info-sahagu2");
 const infoSahagu3 = document.getElementById("info-sahagu3");
 const infoSahagu4 = document.getElementById("info-sahagu4");
 
-// 사상구에 마우스를 올렸을 때
 if (sahagu) {
   sahagu.addEventListener("mouseenter", () => {
     sahagu.setAttribute("fill", "#FFC864"); // 연주황
 
-    // 사상구 인포박스들 보이게 하기
     infoSahagu1.style.display = "block";
     infoSahagu2.style.display = "block";
     infoSahagu3.style.display = "block";
@@ -174,17 +172,46 @@ if (sahagu) {
     });
   });
 
-  // 마우스를 떼면 사상구 인포박스 숨기기
   sahagu.addEventListener("mouseleave", () => {
     sahagu.setAttribute("fill", "#FFFFFF"); // 원래 색상으로 돌아가기
 
-    // 사상구 인포박스들 숨기기
     infoSahagu1.style.display = "none";
     infoSahagu2.style.display = "none";
     infoSahagu3.style.display = "none";
     infoSahagu4.style.display = "none";
   });
   }
+  if (sahagu) {
+  sahagu.addEventListener("click", () => {
+    const imageBox = document.getElementById("image-box-sahagu");
+    const image1 = document.getElementById("imagesahagu1");
+    const image2 = document.getElementById("imagesahagu2");
+
+    // 최초 클릭 시 이미지 로드
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
+    }
+
+    // 토글 기능
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 이미지 박스 숨기기
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 모든 인포박스 숨기기
+    document.querySelectorAll(".info-box").forEach((box) => {
+      box.style.display = "none";
+    });
+  });
+}
 // 사하구 끝------------------------------------------------------------------
 // 남구 시작------------------------------------------------------------------
 const namgu = svgDoc.getElementById("namgu");
@@ -998,27 +1025,6 @@ if (gangseogu1) {
   });
 }
 
-if (gangseogu1) {
-  gangseogu1.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
-
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
-    }
-
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
-      box.style.display = "none";
-    });
-  });
-}
 // 강서구1 끝------------------------------------------------------------------
 // 강서구2 시작------------------------------------------------------------------
 const gangseogu2 = svgDoc.getElementById("gangseogu2");
@@ -1116,21 +1122,27 @@ if (gangseogu3) {
 
 if (gangseogu3) {
   gangseogu3.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
-
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
+    const imageBox = document.getElementById("image-box-gangseogu3");
+    const image1   = document.getElementById("imagegangseogu3-1");
+    
+    // 최초 클릭 시에만 실제 경로로 로드
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
     }
 
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 토글 기능
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 구 이미지 박스 모두 숨김
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 모든 인포박스 숨김
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
