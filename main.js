@@ -113,35 +113,38 @@ if (sasanggu) {
   });
   }
 
-    if (sasanggu) {
-      sasanggu.addEventListener("click", () => {
-        // 이미지 박스를 참조
-        const imageBox = document.getElementById('image-box');
+if (sasanggu) {
+  sasanggu.addEventListener("click", () => {
+    const imageBox = document.getElementById("image-box-sasanggu");
+    const image1 = document.getElementById("imagesasanggu1");
+    const image2 = document.getElementById("imagesasanggu2");
 
-        // 클릭 시 이미지 경로 동적 설정
-        const image1 = document.getElementById('image1');
-        const image2 = document.getElementById('image2');
-
-        // data-src에서 경로를 가져와 src에 설정
-        image1.src = image1.getAttribute('data-src');
-        image2.src = image2.getAttribute('data-src');
-
-        // 이미지 박스가 보이는지 확인하고, 보이게/숨기게 설정
-        if (imageBox.style.display === 'block') {
-          // 이미지 박스를 숨김
-          imageBox.style.display = 'none';
-        } else {
-          // 이미지 박스를 보이게 설정
-          imageBox.style.display = 'block';
-        }
-        // 인포박스를 숨기기
-        const infoBoxes = document.querySelectorAll(".info-box");
-        infoBoxes.forEach((box) => {
-          box.style.display = "none"; // 모든 인포박스 숨기기
-        });
-      });
+    // 이미지 로딩 (필요할 때만)
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
     }
 
+    // 현재 보이면 숨기고, 안 보이면 보이게 (토글)
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 구 이미지 박스는 숨기기
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+
+      imageBox.style.display = "block";
+    }
+
+    // 인포박스는 항상 숨기기
+    document.querySelectorAll(".info-box").forEach((box) => {
+      box.style.display = "none";
+    });
+  });
+}
 // 사상구 끝------------------------------------------------------------------
 // 사하구 시작------------------------------------------------------------------
 const sahagu = svgDoc.getElementById("sahagu");
@@ -221,21 +224,31 @@ if (namgu) {
 
 if (namgu) {
   namgu.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
+    const imageBox = document.getElementById("image-box-namgu");
+    const image1 = document.getElementById("imagenamgu1");
+    const image2 = document.getElementById("imagenamgu2");
 
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
+    // 최초 로딩 시에만 src 세팅
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
     }
 
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 토글 기능
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 이미지 박스는 모두 숨김
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 인포박스는 항상 숨김 처리
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
@@ -282,21 +295,31 @@ if (haeundaegu) {
 
 if (haeundaegu) {
   haeundaegu.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
+    const imageBox = document.getElementById("image-box-haeundaegu");
+    const image1   = document.getElementById("imagehaeundaegu1");
+    const image2   = document.getElementById("imagehaeundaegu2");
 
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
+    // 최초 클릭 시에만 실제 경로로 로드
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
     }
 
-     const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 토글 기능
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 구 이미지 박스는 모두 숨김
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 모든 인포박스 숨김
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
@@ -457,21 +480,31 @@ if (suyeonggu) {
 
 if (suyeonggu) {
   suyeonggu.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
+    const imageBox = document.getElementById("image-box-suyeonggu");
+    const image1 = document.getElementById("imagesuyeonggu1");
+    const image2 = document.getElementById("imagesuyeonggu2");
 
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
+    // 이미지 로딩 (처음 클릭 시에만)
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
     }
 
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 이미지 박스 토글 표시
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 이미지 박스 다 숨기기
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 인포박스는 항상 숨기기
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
@@ -631,21 +664,31 @@ if (gijanggun) {
 
 if (gijanggun) {
   gijanggun.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
+    const imageBox = document.getElementById("image-box-gijanggun");
+    const image1 = document.getElementById("imagegijanggun1");
+    const image2 = document.getElementById("imagegijanggun2");
 
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
+    // 최초 클릭 시에만 이미지 로드
+    if (!image1.src || image1.src === window.location.href) {
+      image1.src = image1.dataset.src;
+    }
+    if (!image2.src || image2.src === window.location.href) {
+      image2.src = image2.dataset.src;
     }
 
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 토글 표시
+    if (imageBox.style.display === "block") {
+      imageBox.style.display = "none";
+    } else {
+      // 다른 이미지 박스는 모두 숨김
+      document.querySelectorAll("div[id^='image-box-']").forEach((box) => {
+        box.style.display = "none";
+      });
+      imageBox.style.display = "block";
+    }
+
+    // 인포박스 모두 숨기기
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
@@ -742,28 +785,6 @@ if (donggu) {
     infoDonggu2.style.display = "none";
     infoDonggu3.style.display = "none";
     infoDonggu4.style.display = "none";
-  });
-}
-
-if (donggu) {
-  donggu.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
-
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
-
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
-    }
-
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
-      box.style.display = "none";
-    });
   });
 }
 // 동구 끝------------------------------------------------------------------
@@ -863,21 +884,21 @@ if (junggu) {
 
 if (junggu) {
   junggu.addEventListener("click", () => {
-    const imageBox = document.getElementById('aimage-box');
-    const image1 = document.getElementById('image1');
-    const image2 = document.getElementById('image2');
+    // HTML에 적어 둔 id와 맞춰서 변경
+    const imageBox = document.getElementById("image-box1");
+    const image1   = document.getElementById("imagejunggu1");
+    const image2   = document.getElementById("imagejunggu2");
 
-    image1.src = image1.getAttribute('data-src');
-    image2.src = image2.getAttribute('data-src');
+    // 실제 이미지 로드
+    image1.src = image1.getAttribute("data-src");
+    image2.src = image2.getAttribute("data-src");
 
-    if (imageBox.style.display === 'block') {
-      imageBox.style.display = 'none';
-    } else {
-      imageBox.style.display = 'block';
-    }
+    // 토글 표시
+    imageBox.style.display =
+      (imageBox.style.display === "block") ? "none" : "block";
 
-    const infoBoxes = document.querySelectorAll(".info-box");
-    infoBoxes.forEach((box) => {
+    // 다른 info-box 숨김
+    document.querySelectorAll(".info-box").forEach((box) => {
       box.style.display = "none";
     });
   });
